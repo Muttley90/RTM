@@ -1,0 +1,29 @@
+{% extends "RTML_app/index.html" %}
+
+{% block content %}
+      {% if form.errors %}
+      <h6 style="text-align:center">Your username and password didn't match. Please try again.</h6>
+      {% endif %}
+
+      {% if next %}
+          {% if user.is_authenticated %}
+          <h6 style="text-align:center">Your account doesn't have access to this page. To proceed,
+          please login with an account that has access.</h6>
+          {% else %}
+          <h6 style="text-align:center">Please login to see this page.</h6>
+          {% endif %}
+      {% endif %}
+            <center><form method="post" action="{% url 'login' %}" style="padding-top:150px">
+            {% csrf_token %}
+            <table style="height:230px;">
+              <tr style="text-align:center;"><td><i class="far fa-user"></i>{{ form.username.label_tag }}</td></tr>
+              <tr style="text-align:center"><td>{{ form.username }}</td></tr>
+              <tr style="text-align:center"><td><i class="fas fa-key"></i>{{ form.password.label_tag }}</td></tr>
+              <tr style="text-align:center"><td>{{ form.password }}</td></tr>
+              <tr>
+
+              </tr><tr style="text-align:center"><td><button type="submit" class="btn btn-outline-success btn-block">Login</button>
+              </td></tr>
+            </table>
+            </form></center>
+{% endblock %}
